@@ -2,7 +2,7 @@ torch # for full alignment 2.2.0
 torchvision
 torchaudio
 packaging
-triton
+triton==2.2.0
 timm==0.4.12
 pytest 
 chardet 
