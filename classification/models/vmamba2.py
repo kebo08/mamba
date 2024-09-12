@@ -1023,7 +1023,7 @@ class SS2Dm0:
         chunk_size = 64,
         dstate = 64,        
         # ==============================
-        selective_scan_backend = None,
+        selective_scan_backend = "torch",
         scan_mode = "cross2d",
         scan_force_torch = True, #I have changed this to True
         # ==============================
