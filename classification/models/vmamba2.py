@@ -1358,7 +1358,7 @@ class VSSM(nn.Module):
             norm=norm_layer(self.num_features), # B,H,W,C
             permute=(Permute(0, 3, 1, 2) if not self.channel_first else nn.Identity()),
             avgpool=nn.AdaptiveAvgPool2d(1),
-            flatten=nn.Flatten(1),
+            # flatten=nn.Flatten(1),
             #head=nn.Linear(self.num_features, num_classes),
         ))
 
