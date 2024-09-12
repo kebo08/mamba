@@ -41,6 +41,11 @@ def ssd_minimal_discrete(X, A, B, C, block_len, initial_states=None):
     Return:
         Y: (batch, length, n_heads, d_head)
     """
+    print(type(X))
+    print(type(A))
+    print(type(B))
+    print(type(C))
+    
     assert X.dtype == A.dtype == B.dtype == C.dtype
     assert X.shape[1] % block_len == 0
 
