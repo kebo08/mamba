@@ -1059,8 +1059,8 @@ class SS2Dm0:
         if force_fp32:
             xs, dts, Bs, Cs = to_fp32(xs, dts, Bs, Cs)
 
-        As = -self.A_logs.to(torch.float).exp().view(KR)
-        Ds = self.Ds.to(torch.float).view(KR, D)
+        As = -self.A_logs.to(torch.float32).exp().view(KR)
+        Ds = self.Ds.to(torch.float32).view(KR, D)
         dt_bias = self.dt_projs_bias.view(KR)
 
         if force_fp32:
