@@ -1025,7 +1025,7 @@ class SS2Dm0:
         # ==============================
         selective_scan_backend = None,
         scan_mode = "cross2d",
-        scan_force_torch = False,
+        scan_force_torch = True, #I have changed this to True
         # ==============================
         **kwargs,
     ):
