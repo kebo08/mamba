@@ -960,7 +960,7 @@ class SS2Dm0:
 
         # forward_type debug =======================================
         FORWARD_TYPES = dict(
-            m0=partial(self.forward_corem0, force_fp32=False, dstate=d_state),
+            m0=partial(self.forward_corem0, force_fp32=True, dstate=d_state),
         )
         self.forward_core = FORWARD_TYPES.get(forward_type, None)
         k_group = 4
@@ -1019,7 +1019,7 @@ class SS2Dm0:
         self,
         x: torch.Tensor=None, 
         # ==============================
-        force_fp32=False, # True: input fp32
+        force_fp32=True, # True: input fp32
         chunk_size = 64,
         dstate = 64,        
         # ==============================
