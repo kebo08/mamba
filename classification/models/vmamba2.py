@@ -1501,7 +1501,7 @@ class VSSM(nn.Module):
             x = x + pos_embed
         for layer in self.layers:
             x = layer(x)
-        x = self.classifier(x)
+        # x = self.classifier(x)
         return x
 
     def flops(self, shape=(3, 224, 224), verbose=True):
