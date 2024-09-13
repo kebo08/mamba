@@ -41,10 +41,10 @@ def ssd_minimal_discrete(X, A, B, C, block_len, initial_states=None):
     Return:
         Y: (batch, length, n_heads, d_head)
     """
-    print(X.dtype)
-    print(A.dtype)
-    print(B.dtype)
-    print(C.dtype)
+    # print(X.dtype)
+    # print(A.dtype)
+    # print(B.dtype)
+    # print(C.dtype)
     
     assert X.dtype == A.dtype == B.dtype == C.dtype
     assert X.shape[1] % block_len == 0
@@ -123,7 +123,7 @@ def mamba_chunk_scan_combined_torch(x, dt, A, B, C, chunk_size, D=None, z=None, 
     u = x * dt.unsqueeze(-1)
     w = A * dt
     
-    y, state = ssd_minimal_discrete(u, w, B, C, block_len=chunk_size, initial_states=initial_states)
+    y, state = ssd_minimal_discrete(u.to(torch.bfloat16), w.to(torch.bfloat16), B.to(torch.bfloat16), C.to(torch.bfloat16), block_len=chunk_size, initial_states=initial_states)
     if D is not None:
         y = y + D.view(y.shape[-2], -1) * x
     if z is not None:
