@@ -960,7 +960,7 @@ class SS2Dm0:
 
         # forward_type debug =======================================
         FORWARD_TYPES = dict(
-            m0=partial(self.forward_corem0, force_fp32=True, dstate=d_state),
+            m0=partial(self.forward_corem0, force_fp32=True, dstate=d_state), #using true for bfloat16
         )
         self.forward_core = FORWARD_TYPES.get(forward_type, None)
         k_group = 4
@@ -1019,7 +1019,7 @@ class SS2Dm0:
         self,
         x: torch.Tensor=None, 
         # ==============================
-        force_fp32=True, # True: input fp32
+        force_fp32=True, # True: input fp32  #using True for bfloat16
         chunk_size = 64,
         dstate = 64,        
         # ==============================
@@ -1032,7 +1032,7 @@ class SS2Dm0:
         assert scan_mode in ["unidi", "bidi", "cross2d"]
         assert selective_scan_backend in [None, "triton", "torch"]
         x_proj_bias = getattr(self, "x_proj_bias", None)
-        to_fp32 = lambda *args: (_a.to(torch.float32) for _a in args)
+        to_fp32 = lambda *args: (_a.to(torch.bfloat16) for _a in args)
 
         N = dstate
         B, H, W, RD = x.shape
@@ -1059,8 +1059,8 @@ class SS2Dm0:
         if force_fp32:
             xs, dts, Bs, Cs = to_fp32(xs, dts, Bs, Cs)
 
-        As = -self.A_logs.to(torch.float32).exp().view(KR)
-        Ds = self.Ds.to(torch.float32).view(KR, D)
+        As = -self.A_logs.to(torch.bfloat16).exp().view(KR)
+        Ds = self.Ds.to(torch.bfloat16).view(KR, D)
         dt_bias = self.dt_projs_bias.view(KR)
 
         if force_fp32:
