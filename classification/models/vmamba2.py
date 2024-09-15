@@ -1066,7 +1066,7 @@ class SS2Dm0:
 
         if force_fp32:
             xs, dts, Bs, Cs = to_fp32(xs, dts, Bs, Cs)
-        print(xs.dtype,As.dtype,Bs.dtype,Cs.dtype)
+        #print(xs.dtype,As.dtype,Bs.dtype,Cs.dtype)
         ys, final_state = selective_scan_chunk_fn(
             xs, dts, As, Bs, Cs, chunk_size=chunk_size, D=Ds, dt_bias=dt_bias, 
             initial_states=initial_state, dt_softplus=True, return_final_states=True,
